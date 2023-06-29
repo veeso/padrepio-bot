@@ -1,2 +1,5 @@
 openai>=0.27
 python-telegram-bot>=13.13
+requests>=2.20.0
+pydub>=0.20.0
+simpleaudio>=1.0.0

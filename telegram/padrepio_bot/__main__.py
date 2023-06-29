@@ -13,10 +13,14 @@
 """
 
 from logging import info, debug, error
-from os import environ
-import openai
+from os import environ, unlink
 from sys import argv
 import logging
+import openai
+from tempfile import NamedTemporaryFile
+
+from .speech.tts import TTSError
+from .speech.google_translate import GoogleTranslateTTS
 
 try:
     from telegram.ext._updater import Updater
@@ -44,6 +48,7 @@ def main() -> None:
     info(f"initialized telegram updater {TELEGRAM_API_KEY}")
     updater.dispatcher.add_handler(CommandHandler("start", start))
     updater.dispatcher.add_handler(CommandHandler("padrepio", padrepio))
+    updater.dispatcher.add_handler(CommandHandler("padrepio-dice", padrepio_dice))
     updater.dispatcher.add_handler(CommandHandler("help", help))
     info("starting telegram bot")
     # Start the Bot
@@ -95,10 +100,56 @@ def padrepio(update: Update, context: CallbackContext):
         debug("sending request to padre pio")
         answer = send_request(text)
     except Exception as err:
-        error(f"failed to get tts speech: {err}")
+        error(f"failed to get openai response: {err}")
         return reply_err(update, f"Non riesco a contattare Padre Pio: {err}")
     debug("got an answer from padre pio")
     context.bot.send_message(chat_id=update.message.chat_id, text=answer)
+
+
+def padrepio_dice(update: Update, context: CallbackContext):
+    text: str = (
+        update.message.text.replace("/padrepio-dice", "")
+        .replace(context.bot.name, "")
+        .strip()
+    )
+    debug(f"text: {text}")
+    if len(text) == 0:
+        context.bot.send_message(
+            chat_id=update.message.chat_id, text="Ti ascolto figliolo"
+        )
+        return
+    try:
+        debug("sending request to padre pio")
+        answer = send_request(text)
+    except Exception as err:
+        error(f"failed to get openai response: {err}")
+        return reply_err(update, f"Non riesco a contattare Padre Pio: {err}")
+    debug("got an answer from padre pio")
+    # get tts for answer
+    tts_engine = GoogleTranslateTTS()
+    try:
+        debug(f"getting speech for {answer}")
+        audio = tts_engine.get_speech(answer)
+    except TTSError as err:
+        error(f"failed to get tts speech: {err}")
+        return reply_err(update, "Padre Pio non può parlare in questo momento")
+
+    debug("correctly got the audio from tts engine")
+    # writing audio to tempfile
+    with NamedTemporaryFile("w+b", suffix=".ogg", delete=False) as f:
+        audio.export(f.name, "ogg")
+        f.close()
+        debug(f"audio exported to {f.name}")
+        # sending document
+        debug("sending voice message...")
+        context.bot.send_voice(
+            chat_id=update.message.chat_id,
+            voice=open(f.name, "rb"),
+            duration=audio.duration_seconds,
+        )
+        info("audio file sent")
+        unlink(f.name)
+        debug("file removed")
 
 
 def reply_err(update: Update, text: str):
@@ -107,7 +158,8 @@ def reply_err(update: Update, text: str):
 
 def help(update: Update, _: CallbackContext):
     update.message.reply_text(
-        """/padrepio <testo> - chiedi consiglio a padre pio 
+        """/padrepio <testo> - chiedi consiglio a padre pio
+/padrepio-dice <testo> - chiedi consiglio a Padre Pio, ma ti risponde parlando
 /help - mostra questo messaggio"""
     )
 

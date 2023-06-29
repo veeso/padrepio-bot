@@ -87,9 +87,27 @@ impl EventHandler for Bot {
             command
                 .edit_original_interaction_response(&ctx.http, |response| {
                     for token in response_content.tokens {
-                        match token {
-                            ResponseTokens::Text(text) => response.content(text),
+                        let query = if let CommandDataOptionValue::String(query) = command
+                            .data
+                            .options
+                            .get(0)
+                            .unwrap()
+                            .resolved
+                            .as_ref()
+                            .unwrap()
+                        {
+                            query.clone()
+                        } else {
+                            String::default()
                         };
+                        match token {
+                            ResponseTokens::Text(text) => {
+                                response.content(format!(
+                                    "{} mi ha chiesto: {query}\n{text}",
+                                    command.user.mention(),
+                                ));
+                            }
+                        }
                     }
 
                     response

@@ -45,6 +45,10 @@ It used to be based on the prega.org padre pio bot, but this has been deactivate
 
     Send a question to Padre Pio and get the answer
 
+- `/padrepio-dice <question>`
+
+    Send a question to Padre Pio and get a vocal as answer
+
 ## Get started 🚀
 
 ### For users
