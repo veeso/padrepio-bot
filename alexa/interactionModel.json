@@ -1,0 +1,56 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "padre pio",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "ContinueIntent",
+          "slots": [],
+          "samples": ["continua"]
+        },
+        {
+          "name": "PadrePioIntent",
+          "slots": [
+            {
+              "name": "userInput",
+              "type": "SEARCH"
+            }
+          ],
+          "samples": ["{userInput}"]
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "SEARCH",
+          "values": [
+            {
+              "name": {
+                "value": "Chi è Padre Pio?"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

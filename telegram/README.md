@@ -4,7 +4,7 @@
   <img src="/assets/padrepio.png" width="128" height="128" />
 </p>
 
-<p align="center">~ A collection of Padre Pio bots ~</p>
+<p align="center">~ A PadrePio bot for Telegram ~</p>
 <p align="center">
   <a href="https://ko-fi.com/veeso" target="_blank">Ko-fi</a>
   ·
@@ -34,11 +34,39 @@
 
 ---
 
-## Bots
+## About padrepio-bot
 
-- [Alexa Skill](./alexa)
-- [Discord](./discord)
-- [Telegram](./telegram)
+padrepio-bot is a Telegram bot using ChatGPT who behaves as Padre Pio.
+It used to be based on the prega.org padre pio bot, but this has been deactivated in june 2023, so now it's been rewritten to interact with chatgpt api directly
+
+## Command API 🐷
+
+- `/padrepio <question>`
+
+    Send a question to Padre Pio and get the answer
+
+## Get started 🚀
+
+### For users
+
+Scan this QR code or go to this URL <https://t.me/padrepioprega_bot> to start a chat with Big Luca bot, then add it to any group or chat directly with him.
+
+### For developers
+
+1. Install padrepio-bot dependencie with pip
+
+    ```sh
+    pip3 install -r requirements.txt
+    ```
+
+2. Run padrepio
+
+    ```sh
+    export LOG_LEVEL="info"
+    export TELEGRAM_API_KEY="..."
+    export CHATGPT_API_KEY="..."
+    python3 -m padrepio_bot
+    ```
 
 ---
 
