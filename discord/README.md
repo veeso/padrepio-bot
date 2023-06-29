@@ -1,4 +1,4 @@
-# Buongiornissimo discord
+# Padre Pio Discord Bot
 
 <p align="center">
   <img src="assets/padrepio.png" width="256" height="315" />
