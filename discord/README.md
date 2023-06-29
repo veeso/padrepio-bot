@@ -1,16 +1,16 @@
 # Buongiornissimo discord
 
 <p align="center">
-  <img src="assets/demo.png" width="256" height="315" />
+  <img src="assets/padrepio.png" width="256" height="315" />
 </p>
 
-<p align="center">~ Buongiornissimo Discord bot ~</p>
+<p align="center">~ Padre Pio Discord bot ~</p>
 <p align="center">
   <a href="#get-started">Get started</a>
 </p>
 
 <p align="center">Developed by <a href="https://veeso.github.io/" target="_blank">@veeso</a></p>
-<p align="center">Current version: 0.1.0 (24/05/2023)</p>
+<p align="center">Current version: 0.2.0 (29/06/2023)</p>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"
@@ -18,19 +18,19 @@
       src="https://img.shields.io/badge/License-MIT-teal.svg"
       alt="License-MIT"
   /></a>
-  <a href="https://github.com/veeso/buongiornissimo-discord/stargazers"
+  <a href="https://github.com/veeso/padrepio-bot/stargazers"
     ><img
-      src="https://img.shields.io/github/stars/veeso/buongiornissimo-discord.svg"
+      src="https://img.shields.io/github/stars/veeso/padrepio-bot.svg"
       alt="Repo stars"
   /></a>
-  <a href="https://crates.io/crates/buongiornissimo-discord"
+  <a href="https://crates.io/crates/padrepio-discord-bot"
     ><img
-      src="https://img.shields.io/crates/d/buongiornissimo-discord.svg"
+      src="https://img.shields.io/crates/d/padrepio-discord-bot.svg"
       alt="Downloads counter"
   /></a>
-  <a href="https://crates.io/crates/buongiornissimo-discord"
+  <a href="https://crates.io/crates/padrepio-discord-bot"
     ><img
-      src="https://img.shields.io/crates/v/buongiornissimo-discord.svg"
+      src="https://img.shields.io/crates/v/padrepio-discord-bot.svg"
       alt="Latest version"
   /></a>
   <a href="https://ko-fi.com/veeso">
